@@ -1,5 +1,6 @@
-# cfci-cybersecurity-projects
+# CFCI Cybersecurity Projects Backup Repo
 
-## Backup repo for CFCI projects
-
-# Project 1: NetSys Mapper
+## Project 1: NetSys Mapper
+- Basic home network map
+- Home network scanning
+- Bash script
