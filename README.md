@@ -6,3 +6,5 @@
 - Basic home network map
 - Home network scanning
 - Bash script
+
+Misc: Added GH action workflow to run bash script
