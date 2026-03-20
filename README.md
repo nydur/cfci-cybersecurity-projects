@@ -7,4 +7,6 @@
 - Home network scanning
 - Bash script
 
-Misc: Added GH action workflow to run bash script
+*Misc: Added GH action workflow to run bash script*
+
+## Project 2: ???
