@@ -1,0 +1,14 @@
+name: "Bash script"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-script-job:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run a bash script
+      run: bash ./sysinfo.sh
