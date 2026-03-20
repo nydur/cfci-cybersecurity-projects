@@ -11,4 +11,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Run a bash script
-      run: bash ./sysinfo.sh
+      run: bash ./project_1/sysinfo.sh
