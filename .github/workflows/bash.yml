@@ -1,4 +1,4 @@
-name: "Bash script"
+name: "Bash script for Project 1"
 
 on:
   push:
@@ -9,6 +9,6 @@ jobs:
   run-script-job:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Run a bash script
       run: bash ./project_1/sysinfo.sh
