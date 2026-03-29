@@ -1,6 +1,6 @@
 # CFCI Cybersecurity Projects Backup Repo
 
-*Does not include the submitted .rar file*
+*Does not include the project briefs (for confidentiallity) and submitted .rar file*
 
 ## Project 1: NetSys Mapper
 - Basic home network map
