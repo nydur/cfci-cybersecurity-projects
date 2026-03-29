@@ -1,2 +1,5 @@
 # .rar files
 *.rar
+
+# project brief .pdf
+*.pdf

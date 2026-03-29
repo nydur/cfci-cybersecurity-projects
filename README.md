@@ -9,4 +9,5 @@
 
 *Misc: Added GH action workflow to run bash script*
 
-## Project 2: ???
+## Project 2: Network Remote Control and Monitoring
+- Automated IP scanner
