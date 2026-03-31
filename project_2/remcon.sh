@@ -7,9 +7,10 @@ DIVIDER="=================================================="
 echo "AUTOMATED IP SCANNER & STUFF"
 echo "$DIVIDER"
 
-#STEP 1: User inputs an IP range to begin process
-
-function ipcheck() {
+# Lists of functions that will be called in the later steps
+# Function to run IP validity
+function ipcheck() 
+{
     [[ "$1" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]] || return 1
     IFS='.' read -r a b c d <<< "$1"
     for octet in $a $b $c $d; do
@@ -18,9 +19,53 @@ function ipcheck() {
     return 0
 }
 
+# Function to install any required or missing dependencies/packages on the machine
+function install_dep()
+{
+    local packages=(nmap hydra)
+    local missing=()
+
+    for pkg in "${packages[@]}"
+    do
+        command -v "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+
+    if [[ ${missing[@]} -eq 0 ]]
+    then
+        echo "All required packages are already installed."
+        return
+    fi
+
+    echo "Missing packages: ${missing[*]}"
+    echo "Installing..."
+    sudo apt-get install -y "${missing[@]}"
+}
+
+# Function to scan for active services
+function scan_service()
+{
+    local ip=$1
+    echo "Scanning in progress..."
+    nmap -sV "$ip"
+}
+
+# Function to cleanup any newly installed dependencies/packages on the machine
+function cleanup_dep() {
+    if [[ ${#missing[@]} -gt 0 ]]; then
+    echo "Removing packages that were installed for this scan: ${missing[*]}"
+    if [[ $EUID -eq 0 ]]; then
+        apt-get remove -y "${missing[@]}"
+    else
+        sudo apt-get remove -y "${missing[@]}"
+    fi
+fi
+}
+
+#STEP 1: User inputs an IP range to begin process
 read -p "Hi, what is the IP address? " userip
 echo ""
 
+#Step 1a: While statement that will refer to ipcheck Function (if IP is invalid)
 while ! ipcheck "$userip"; do
     echo "Uh-oh! The IP address, $userip is invalid!"
     echo ""
@@ -29,22 +74,25 @@ while ! ipcheck "$userip"; do
     echo ""
 done
 
+#Step 1b: If IP is valid, will proceed to Step 2
 echo "Great! The IP address, $userip is valid!"
 echo ""
 sleep 1
 echo "Now, let's have a quick look..."
 echo ""
 
-#2 ssh service scan
+#Step 2: Scanning for SSH service
+install_dep
+scan_service "$userip"
 
 
-#3 credential brute force
+#3 credential brute force with hydra without interactive shell
 
 
 #4 run series  of commands on successful login
 
 
 #5 generate report of post-scan and brute force login
-# user keys only once at the start (IP)
+cleanup_dep
+# user keys only once at the start for the IP
 # installs any package/tools on the kali machine needed (if unavailable) for the whole process automatically (this should be after the user keys in IP)
-# no interactive shell for the brute force login
