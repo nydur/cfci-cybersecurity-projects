@@ -10,7 +10,7 @@ Basic project outline
 - Home network scanning
 - Bash script to automate network scan
 
-*Misc: Added optional GH action workflow to run bash script*
+*Note: Added optional GH action workflow to run bash script*
 
 ## Project 2: Network Remote Control and Monitoring
 Basic project outline
@@ -18,3 +18,5 @@ Basic project outline
 - Scan for open ports
 - Brute-force login
 - Bash script to automate network monitoring
+
+*Note: Completed bash script unlisted*
