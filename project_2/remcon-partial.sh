@@ -92,7 +92,7 @@ scan_service "$userip"
 #4 run series  of commands on successful login
 
 
-#5 generate report of post-scan and brute force login
+#5 generate report of post-scan and login
 cleanup_dep
-# user keys only once at the start for the IP
-# installs any package/tools on the kali machine needed (if unavailable) for the whole process automatically (this should be after the user keys in IP)
+echo "$DIVIDER"
+echo "END OF AUTOMATED IP SCANNER & STUFF"
