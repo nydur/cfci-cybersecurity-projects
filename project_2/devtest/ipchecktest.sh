@@ -25,8 +25,6 @@ valid_ipv4() {
     return $stat
 }
 
-# --- Example Usage ---
-
 # Read input from the user
 read -p "Enter an IP address to validate: " user_input
 
