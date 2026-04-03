@@ -9,56 +9,56 @@ echo "$DIVIDER"
 
 # Lists of functions that will be called in the later steps
 # Function to run IP validity
-function ipcheck() 
-{
+function ipcheck() {
     [[ "$1" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]] || return 1
     IFS='.' read -r a b c d <<< "$1"
-    for octet in $a $b $c $d; do
+    for octet in "$a" "$b" "$c" "$d"; do
         (( octet < 0 || octet > 255 )) && return 1
     done
     return 0
 }
 
 # Function to install any required or missing dependencies/packages on the machine
-function install_dep()
-{
+function install_dep() {
     local packages=(nmap hydra)
-    local missing=()
+    missing=()
 
-    for pkg in "${packages[@]}"
-    do
+    for pkg in "${packages[@]}"; do
         command -v "$pkg" &>/dev/null || missing+=("$pkg")
     done
 
-    if [[ ${missing[@]} -eq 0 ]]
-    then
-        echo "All required packages are already installed."
-        return
+    if [[ ${#missing[@]} -eq 0 ]]; then
+        echo "Nice! All required packages are already installed."
+        return 0
     fi
 
     echo "Missing packages: ${missing[*]}"
     echo "Installing..."
     sudo apt-get install -y "${missing[@]}"
+    echo ""
 }
 
 # Function to scan for active services
-function scan_service()
-{
-    local ip=$1
-    echo "Scanning in progress..."
-    nmap -sV "$ip"
+function scan_service() {
+    local ip="$1"
+    echo "Scanning in progress for SSH on $ip..."
+    local SSH_STATUS=$(nmap -sV "$ip" | grep '^22/tcp' | awk '{print $2}')
+    echo "SSH_Status: ${SSH_STATUS:-not detected}"
+    echo ""
 }
 
-# Function to cleanup any newly installed dependencies/packages on the machine
+# Function to cleanup only newly installed dependencies/packages on the machine
 function cleanup_dep() {
     if [[ ${#missing[@]} -gt 0 ]]; then
-    echo "Removing packages that were installed for this scan: ${missing[*]}"
-    if [[ $EUID -eq 0 ]]; then
-        apt-get remove -y "${missing[@]}"
-    else
-        sudo apt-get remove -y "${missing[@]}"
+        echo "Removing packages that were installed for this scan: ${missing[*]}"
+        if [[ ${EUID} -eq 0 ]]; then
+            apt-get purge -y "${missing[@]}"
+            apt-get autoremove -y
+        else
+            sudo apt-get purge -y "${missing[@]}"
+            sudo apt-get autoremove -y
+        fi
     fi
-fi
 }
 
 #STEP 1: User inputs an IP range to begin process
