@@ -1,0 +1,151 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="remcon_flowchart" id="remcon_flowchart">
+    <mxGraphModel dx="1070" dy="554" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" value="AUTOMATED IP SCANNER &amp; STUFF — Overall Process Flow" vertex="1">
+          <mxGeometry height="40" width="700" x="230" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="start" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" value="START" vertex="1">
+          <mxGeometry height="60" width="200" x="480" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="prelim_label" parent="1" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;" value="PRELIMINARY STAGE" vertex="1">
+          <mxGeometry height="40" width="160" x="50" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="define_functions" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Define Functions&#xa;ipcheck, install_dep, scan_service&#xa;brute_force, leave_file&#xa;generate_report, cleanup_dep" vertex="1">
+          <mxGeometry height="70" width="400" x="380" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="define_globals" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Define Global Variables&#xa;CRACKED_USER, CRACKED_PASS&#xa;missing, SEPARATOR, DIVIDER" vertex="1">
+          <mxGeometry height="60" width="400" x="380" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="input_label" parent="1" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;" value="INPUT STAGE" vertex="1">
+          <mxGeometry height="40" width="160" x="50" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="user_input" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Prompt User&#xa;&quot;Hi, what is the IP address?&quot;&#xa;read USERIP" vertex="1">
+          <mxGeometry height="60" width="400" x="380" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="ipcheck" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="ipcheck($USERIP)&#xa;Valid IPv4?" vertex="1">
+          <mxGeometry height="90" width="300" x="430" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="invalid_ip" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Display Error Message&#xa;&quot;IP is invalid!&quot;&#xa;Re-prompt User" vertex="1">
+          <mxGeometry height="60" width="200" x="820" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="valid_ip" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Display &quot;IP is valid!&#xa;Now let us get things started...&quot;" vertex="1">
+          <mxGeometry height="50" width="400" x="380" y="565" as="geometry" />
+        </mxCell>
+        <mxCell id="install_dep" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="install_dep()&#xa;Check and Install Missing Packages&#xa;nmap, hydra, sshpass" vertex="1">
+          <mxGeometry height="60" width="400" x="380" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="exploit_label" parent="1" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;" value="EXPLOIT STAGE" vertex="1">
+          <mxGeometry height="40" width="160" x="50" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="scan_service" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="scan_service()&#xa;nmap -sV $USERIP&#xa;Check SSH Port 22" vertex="1">
+          <mxGeometry height="60" width="400" x="380" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="ssh_check" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="SSH_CHECK == open?" vertex="1">
+          <mxGeometry height="90" width="300" x="430" y="825" as="geometry" />
+        </mxCell>
+        <mxCell id="ssh_closed" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Display&#xa;&quot;SSH port is not open. Goodbye.&quot;" vertex="1">
+          <mxGeometry height="60" width="200" x="820" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="end_ssh" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" value="END" vertex="1">
+          <mxGeometry height="50" width="130" x="855" y="935" as="geometry" />
+        </mxCell>
+        <mxCell id="brute_force" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="brute_force()&#xa;hydra -C secrets $USERIP ssh -t 4&#xa;Extract CRACKED_USER and CRACKED_PASS" vertex="1">
+          <mxGeometry height="60" width="400" x="380" y="945" as="geometry" />
+        </mxCell>
+        <mxCell id="creds_check" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="CRACKED_PASS&#xa;not empty?" vertex="1">
+          <mxGeometry height="90" width="300" x="430" y="1035" as="geometry" />
+        </mxCell>
+        <mxCell id="no_creds" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Display&#xa;&quot;No credentials found.&#xa;Skipping Steps 4 and 5.&quot;" vertex="1">
+          <mxGeometry height="60" width="200" x="820" y="1055" as="geometry" />
+        </mxCell>
+        <mxCell id="end_creds" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" value="END" vertex="1">
+          <mxGeometry height="50" width="130" x="855" y="1145" as="geometry" />
+        </mxCell>
+        <mxCell id="leave_file" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="leave_file()&#xa;sshpass -p $CRACKED_PASS ssh&#xa;mkdir Nice and create result.txt" vertex="1">
+          <mxGeometry height="60" width="400" x="380" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="post_label" parent="1" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;" value="POST-EXPLOIT STAGE" vertex="1">
+          <mxGeometry height="40" width="160" x="50" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="generate_report" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="generate_report()&#xa;Generate Timestamped Report File&#xa;IP, SSH Status, Credentials, Packages" vertex="1">
+          <mxGeometry height="60" width="400" x="380" y="1245" as="geometry" />
+        </mxCell>
+        <mxCell id="cleanup_dep" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="cleanup_dep()&#xa;Remove Newly Installed Packages&#xa;if missing array is greater than 0" vertex="1">
+          <mxGeometry height="60" width="400" x="380" y="1335" as="geometry" />
+        </mxCell>
+        <mxCell id="end" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" value="END" vertex="1">
+          <mxGeometry height="60" width="200" x="480" y="1425" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;" target="define_functions">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="define_functions" style="edgeStyle=orthogonalEdgeStyle;" target="define_globals">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="define_globals" style="edgeStyle=orthogonalEdgeStyle;" target="user_input">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="user_input" style="edgeStyle=orthogonalEdgeStyle;" target="ipcheck">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="ipcheck" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;fontStyle=1;fillColor=#f8cecc;" target="invalid_ip" value="NO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="invalid_ip" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitObject=invalid_ip;entryX=1;entryY=0.5;entryObject=user_input;" target="user_input">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="420" />
+              <mxPoint x="790" y="420" />
+              <mxPoint x="790" y="385" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="ipcheck" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontStyle=1;fillColor=#d5e8d4;" target="valid_ip" value="YES">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="valid_ip" style="edgeStyle=orthogonalEdgeStyle;" target="install_dep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="install_dep" style="edgeStyle=orthogonalEdgeStyle;" target="scan_service">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="scan_service" style="edgeStyle=orthogonalEdgeStyle;" target="ssh_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="ssh_check" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;fontStyle=1;fillColor=#f8cecc;" target="ssh_closed" value="NO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="ssh_closed" style="edgeStyle=orthogonalEdgeStyle;" target="end_ssh">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="ssh_check" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontStyle=1;fillColor=#d5e8d4;" target="brute_force" value="YES">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="brute_force" style="edgeStyle=orthogonalEdgeStyle;" target="creds_check">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="creds_check" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;fontStyle=1;fillColor=#f8cecc;" target="no_creds" value="NO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="no_creds" style="edgeStyle=orthogonalEdgeStyle;" target="end_creds">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="creds_check" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontStyle=1;fillColor=#d5e8d4;" target="leave_file" value="YES">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="leave_file" style="edgeStyle=orthogonalEdgeStyle;" target="generate_report">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="generate_report" style="edgeStyle=orthogonalEdgeStyle;" target="cleanup_dep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="cleanup_dep" style="edgeStyle=orthogonalEdgeStyle;" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
