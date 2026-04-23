@@ -1,4 +1,4 @@
-# CFCI Cybersecurity Projects Backupgit
+# CFCI Cybersecurity Projects Backup
 
 *For confidentiality, project folders does not include the full project briefs and final submitted file(s)*
 
