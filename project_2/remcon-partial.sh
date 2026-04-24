@@ -40,10 +40,9 @@ function install_dep() {
 
 # Function to scan for active services
 function scan_service() {
-    local ip="$1"
-    echo "Scanning in progress for SSH on $ip..."
-    local SSH_STATUS=$(nmap -sV "$ip" | grep '^22/tcp' | awk '{print $2}')
-    echo "SSH_Status: ${SSH_STATUS:-not detected}"
+    echo "Scanning in progress on $USERIP for SSH..." >&2
+    local ssh_status=$(nmap -sV "$USERIP" | grep '^22/tcp' | awk '{print $2}')
+    echo "${ssh_status:-not detected}"
     echo ""
 }
 
@@ -87,12 +86,14 @@ scan_service "$userip"
 
 
 #3 credential brute force with hydra without interactive shell
-
+...
 
 #4 run series  of commands on successful login
-
+...
 
 #5 generate report of post-scan and login
+...
+
 cleanup_dep
 echo "$DIVIDER"
 echo "END OF AUTOMATED IP SCANNER & STUFF"
