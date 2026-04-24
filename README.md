@@ -1,8 +1,8 @@
 # CFCI Cybersecurity Projects Backup
 
-*For confidentiality, project folders does not include the full project briefs and final submitted file(s)*
+This repository is a backup source for the projects completed throughout the CFCI Cybersecurity course. Reference test and sample scripts are included within the respective `devtest` subfolders.
 
-Reference test and sample scripts are included within the respective `devtest` subfolders.
+*For confidentiality, the respective project folders will not include the full project briefs and final submitted file(s)*
 
 # Project 1: NetSys Mapper
 *Module led by James*
