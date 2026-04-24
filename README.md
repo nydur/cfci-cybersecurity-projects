@@ -25,7 +25,7 @@ Reference test and sample scripts are included within the respective `devtest` s
 
 *Note: Completed bash script for this project is unlisted*
 
-# Project 3: Python Project TBD
+# Project 3: Python Fundamentals - TBD
 *Module led by Samson*
 
 ## Basic project outline
