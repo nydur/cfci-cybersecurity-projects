@@ -33,4 +33,4 @@ This repository is a backup source for the projects completed throughout the CFC
 - Analyse potential threats by detecting suspicious behavior or attack patterns
 - Python script to automate process
 
-*Note: Included bash script log analyser as baseline guide
+*Note: Included bash script log analyser as baseline guide*
