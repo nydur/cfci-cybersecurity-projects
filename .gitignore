@@ -3,3 +3,6 @@
 
 # project brief .pdf
 *.pdf
+
+# test .log files
+*.log
