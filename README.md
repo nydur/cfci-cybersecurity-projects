@@ -25,11 +25,12 @@ This repository is a backup source for the projects completed throughout the CFC
 
 *Note: Completed bash script for this project is unlisted*
 
-# Project 3: Python Fundamentals - TBD
+# Project 3: Python Fundamentals - Log Recon
 *Module led by Samson*
 
 ## Basic project outline
-- ...
-- ...
-- ...
-- ...
+- Parse and generate insights from log file(s)
+- Analyse potential threats by detecting suspicious behavior or attack patterns
+- Python script to automate process
+
+*Note: Included bash script log analyser as baseline guide
