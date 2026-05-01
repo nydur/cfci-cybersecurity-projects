@@ -38,4 +38,28 @@ def analyse_auth_log(filename='sample_auth.log'):
     success_root = [l for l in lines in 'Accepted' in l and 'root' in l.split()]
     success_root_ips = [extract_ip(l) for l in success_root if extract_ip(l)]
 
-    # 
+    # Print results
+    print(f"The number of failed attempts: {len(failed_lines)}")
+    print(f"The number of failed attempts by root: {len(failed_root)}")
+    print(f"The number of failed attempts by invalid users: {len(failed_invalid)}")
+    print(f"The number of failed attempts by valid users: {len(failed_valid)}")
+
+    if failed_ips:
+        print(f"IP with the highest failed attempts: {Counter(failed_ips).most_common(1)[0][0]}")
+
+    if invalid_users:
+        invalid_counter = Counter(invalid_users)
+        most_invalid, inv_count = invalid_counter.most_common(1)[0]
+        print(f"Invalid username that has the most number of failed attempts: {most_invalid}")
+        print(f"The number of attempts for that invalid username: {inv_count}")
+
+    if valid_users:
+        print(f"Valid username that has the most number of failed attempts: {Counter(valid_users).most_common(1)[0][0]}")
+
+    print(f"The number of successful attempts as root: {len(success_root)}")
+
+    if success_root_ips:
+        print(f"IP with the highest successful attempts as root: {Counter(success_root_ips).most_common(1)[0][0]}")
+
+if __name__ == "__main__":
+    analyse_auth_log('sample_auth.log')
