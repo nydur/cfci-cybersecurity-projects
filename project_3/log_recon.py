@@ -3,7 +3,14 @@
 # Preliminary step: Define modules
 import re # To work with regular expressions (regex)
 import os # To use os functionality
+import urllib.request # To make HTTP requests to ip-api.com
+import json # To parse JSON response
 from datetime import datetime # To store info a date/time objects
+
+#Supplementary step: To geolocate IP address
+geoip_cache = {}
+def geolocate(ip):
+
 
 # Step 1: Parse log file(s)
 def parse_log(filepath):
@@ -17,6 +24,6 @@ def analyse_events(events):
 def save_report(findings, output_file, log_files):
 
 
-# Main step: Runs program
+# Main step: Runs overall process
 if __name__ == "__main__":
     
