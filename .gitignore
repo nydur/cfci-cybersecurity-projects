@@ -6,3 +6,6 @@
 
 # test .log files
 *.log
+
+*project sandbox
+sandbox/
