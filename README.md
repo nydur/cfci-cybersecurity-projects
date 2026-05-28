@@ -33,6 +33,8 @@ This repository is a backup source for the projects completed throughout the CFC
 - Analyse potential threats by detecting suspicious behavior or attack patterns
 - Python script to automate process
 
+*Note: Included bash script log analyser as baseline guide*
+
 # Project 4: Breach Point Part 1 - Pen Testing
 *Module led by Samson*
 
@@ -41,5 +43,3 @@ This repository is a backup source for the projects completed throughout the CFC
 - Nmap scan on TCP port with options
 - Pen test on targeted IP/CIDR with options
 - Bash script to automate process
-
-*Note: Included bash script log analyser as baseline guide*
