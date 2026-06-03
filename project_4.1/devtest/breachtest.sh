@@ -13,10 +13,10 @@ read SCAN_MODE
 
 case $SCAN_MODE in
     1)
-        nmap $IP_NETWORK -Pn -sV -p22 -oN
+        nmap $IP_NETWORK -Pn -sV -p22 -oN basic_scan.txt
     ;;
     2)
-        sudo nmap $IP_NETWORK -O -sV -Pn -p-
+        sudo nmap $IP_NETWORK -O -sV -Pn -p- -oN full_scan.txt
     ;;
     3)
         exit
