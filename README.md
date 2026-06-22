@@ -43,3 +43,5 @@ This repository is a backup source for the projects completed throughout the CFC
 - Nmap scan on TCP port with options
 - Pen test on targeted IP/CIDR with options
 - Bash script to automate process
+
+*Note: Completed bash script for this project is unlisted*
