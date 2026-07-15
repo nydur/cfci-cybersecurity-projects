@@ -35,13 +35,23 @@ This repository is a backup source for the projects completed throughout the CFC
 
 *Note: Included bash script log analyser as baseline guide*
 
-# Project 4: Breach Point Part 1 - Pen Testing
+# Project 4 - Part 1: Breach Point - Pen Testing
 *Module led by Samson*
 
 ## Basic project outline
 - Scan IP/CIDR with options
 - Nmap scan on TCP port with options
-- Pen test on targeted IP/CIDR with options
+- Pen test on targeted IP/CIDR with options (to gain intial access)
 - Bash script to automate process
+
+*Note: Completed bash script for this project is unlisted*
+
+# Project 4 - Part 2: Breach Trace
+*Module led by Samson*
+
+## Basic project outline
+- Expand upon attack path from Part 1 with 3 additional options (post-exploit)
+- Set up Kibana rules for alerts and monitoring
+- Extended bash script from Part 1 to automate process
 
 *Note: Completed bash script for this project is unlisted*
