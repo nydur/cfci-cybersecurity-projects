@@ -1,0 +1,118 @@
+# Kibana Alert Rules - Scope 2: Alerting and Monitoring
+# Index Pattern: logs-*
+# Rule setup via Security > Rules > Detection rules (SIEM) > Create new rule
+
+rules:
+
+  # Rule 1: SSH Brute Force Detection
+  # Trigger: Stage 3A (Hydra brute force against SSH)
+  # Detection: Multiple failed network logons from same IP
+  - name: "SSH Brute Force Detected"
+    type: threshold
+    severity: medium
+    index:
+      - logs-*
+    query: >
+      event.code: "4625"
+      AND winlog.event_data.LogonType: "3"
+      AND winlog.event_data.IpAddress: *
+      AND NOT winlog.event_data.IpAddress: "-"
+      AND host.ip: "172.16.100.20"
+    threshold:
+      field: winlog.event_data.IpAddress
+      value: 5
+    time_window: 1m
+    description: >
+      Detects multiple failed network logon attempts (Event ID 4625)
+      from the same source IP within 1 minute. Consistent with Hydra
+      SSH brute force behaviour. Targets the Linux web server (172.16.100.20)
+      Fires when 5 or more failures network logon are 
+      recorded from a single IP address within 1 minute.
+    references:
+      - "MITRE ATT&CK T1110 - Brute Force"
+      - "MITRE ATT&CK T1110.001 - Password Guessing"
+
+  # Rule 2: SMB Attack Detection
+  # Trigger: Stage 3D (enum4linux SMB enumeration)
+  # Detection: Failed network logons consistent with SMB auth attempts
+  - name: "SMB Attack Detected"
+    type: threshold
+    severity: medium
+    index:
+      - logs-*
+    query: >
+      event.code: "4625"
+      AND winlog.event_data.LogonType: "3"
+      AND winlog.event_data.IpAddress: *
+      AND NOT winlog.event_data.IpAddress: "-"
+      AND host.ip: ("172.16.50.10" OR "172.16.50.254")
+    threshold:
+      field: winlog.event_data.IpAddress
+      value: 3
+    time_window: 1m
+    description: >
+      Detects failed network logon attempts (Event ID 4625, LogonType 3)
+      consistent with SMB enumeration activity from tools such as
+      enum4linux. Lower threshold than SSH brute force (3 failures)
+      as SMB enumeration generates fewer authentication attempts within 1 minute.
+      Targets Windows Client (172.16.50.10) and Domain Controller
+      (172.16.50.254).
+    references:
+      - "MITRE ATT&CK T1021.002 - SMB/Windows Admin Shares"
+      - "MITRE ATT&CK T1135 - Network Share Discovery"
+
+  # Rule 3: Pass the Hash Attack Detection
+  # Trigger: Stage 3F (Impacket hash dumping → manual PtH)
+  # Detection: Successful NTLM network logon (hash used directly)
+  - name: "Pass the Hash Attack Detected"
+    type: custom_query
+    severity: high
+    index:
+      - logs-*
+    query: >
+      event.code: "4624"
+      AND winlog.event_data.LogonType: "3"
+      AND winlog.event_data.AuthenticationPackageName: "NTLM"
+      AND winlog.event_data.LogonProcessName: "NtLmSsp"
+      AND NOT winlog.event_data.SubjectUserName: "*$"
+    time_window: 5m
+    description: >
+      Detects successful network logons (Event ID 4624) using NTLM
+      authentication without a plaintext password, which is the
+      signature of a Pass the Hash attack. Filters out machine
+      accounts (ending in $) to reduce false positives. Any single
+      match is considered suspicious and triggers the alert.
+      Targets Windows Client (172.16.50.10) and Domain Controller
+      (172.16.50.254).
+    references:
+      - "MITRE ATT&CK T1550.002 - Pass the Hash"
+      - "MITRE ATT&CK T1078 - Valid Accounts"
+
+  # Rule 4: hping3 DDoS Attack Detection
+  # Trigger: Stage 3G (hping3 SYN/UDP/ICMP flood)
+  # Detection: High volume network connections via Sysmon
+  - name: "hping3 DDoS Attack Detected"
+    type: threshold
+    severity: high
+    index:
+      - logs-*
+    query: >
+      event.code: "3"
+      AND event.provider: "Microsoft-Windows-Sysmon"
+      AND winlog.event_data.DestinationIp: ("172.16.50.10" OR "172.16.50.254")
+      AND winlog.event_data.SourceIp: *
+    threshold:
+      field: winlog.event_data.SourceIp
+      value: 500
+    time_window: 1m
+    description: >
+      Detects a high volume of inbound network connections (Sysmon
+      Event ID 3) to the Windows Client (172.16.50.10) or Domain
+      Controller (172.16.50.254) from a single source IP within
+      1 minute. A threshold of 500 connections per minute is
+      consistent with hping3 flood behaviour (SYN, UDP, or ICMP).
+      Relies on Sysmon being installed and configured on target
+      Windows machines.
+    references:
+      - "MITRE ATT&CK T1498 - Network Denial of Service"
+      - "MITRE ATT&CK T1498.001 - Direct Network Flood"
